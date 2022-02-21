@@ -4,9 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {createTheme} from "@mui/material";
+import {orange, pink, grey} from "@mui/material/colors";
+import {ThemeProvider} from "@emotion/react";
+
+
+const theme = createTheme({
+  status: {
+    danger: orange[500],
+  },
+  palette:{
+    mode: 'dark',
+    primary: pink,
+    secondary: grey
+  }
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
