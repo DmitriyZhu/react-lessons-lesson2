@@ -28,7 +28,7 @@ const chatList = [
   {name: 'Chat3', id: uuid()},
 ]
 
-
+//Just forgot to create new branch
 function App() {
   const theme = useTheme();
 
