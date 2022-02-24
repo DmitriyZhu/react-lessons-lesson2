@@ -8,6 +8,8 @@ import {createTheme} from "@mui/material";
 import {orange, pink, grey} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
 
+import { BrowserRouter } from 'react-router-dom';
+
 
 const theme = createTheme({
   status: {
@@ -23,7 +25,9 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
