@@ -20,7 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Chat from '../components/Chat';
 import Undef from '../pages/Undef';
  
-const chatList = {
+let chatList = {
   default: {name: 'default', messages: [{ message: 'Enter your message please in default', author: 'bot' }]},
   chat1: {name: 'Chat1', messages: [{ message: 'Enter your message please in chat1', author: 'bot' }]},
   chat2: {name: 'Chat2', messages: [{ message: 'Enter your message please in chat2', author: 'bot' }]},
@@ -28,74 +28,83 @@ const chatList = {
 }
 
               
-const Chats = () => { 
+const Chats = () => {
 
-  const location  = useLocation();
-  const [list, setList] = useState(chatList);
-  const {uid} = useParams();
-  useEffect(()=>{},[uid]);
+    const location = useLocation();
+    const [list, setList] = useState(chatList);
+    let {uid} = useParams();
+    const [uidLocal, setUid] = useState(uid);
 
-  const deleteFromChats = () => {
-  	if(uid === 'default'){
-  		toast('Unable to delete default chat!')
-  		return;
+  	useEffect(() => { }, [uidLocal]);
+
+  	const changeListUid = () => {
+  		console.log(uid);
+		setUid(uid);
   	}
-    delete chatList[uid];
-    setList(chatList);
-  }
 
-  const addChat = () => {
-  	const newChatUid = uuid();
-  	chatList[newChatUid] = chatList['default'];
-  	chatList[newChatUid].name = 'New chat '+newChatUid;
-  }
+    const deleteFromChats = () => {
+        if (uid === 'default') {
+            toast('Unable to delete default chat!')
+            return;
+        }
+        const newChatList = {...list};
+        delete newChatList[uid];
+        setList(newChatList);
+    }
 
-  if(!chatList[uid]){
-  	return <Undef/>
-  }
+    const addChat = () => {
+        const newChatUid = uuid();
+        chatList[newChatUid] = chatList['default'];
+        chatList[newChatUid].name = 'New chat ' + newChatUid;
+    }
 
-  return (
-  		<>
-	  		<div className={'chatList'}>
-	  			
-	  			{ 
-		  			Object.keys(chatList).map( index => ( 
-				          <ListItem key={index} disablePadding>
-				            <Link to={'/chats/'+index} state={{ uid:index, messages:list[index].messages }}>
-				              <ListItemButton>
-				                <ListItemIcon>
-				                  <ChatIcon />
-				                </ListItemIcon>
-				                <ListItemText primary={list[index].name} secondary={index === uid?'Selected':''} />
-				              </ListItemButton>
-				            </Link>
-				          </ListItem>
-		        		) 
-		        	)
-			  	}
-			  	<ListItem key={uuid()} onClick={addChat} disablePadding>
-	              <ListItemButton>
-	                <ListItemIcon>
-	                  <Add />
-	                </ListItemIcon>
-	                <ListItemText primary='Add new chat' />
-	              </ListItemButton>
-	          	</ListItem>
-			  	<ListItem key={uuid()} onClick={deleteFromChats} disablePadding>
-	              <ListItemButton>
-	                <ListItemIcon>
-	                  <Delete />
-	                </ListItemIcon>
-	                <ListItemText primary='Delete current chat' secondary={list[uid].name} />
-	              </ListItemButton>
-	          	</ListItem>
-	        </div>
+    if (!chatList[uid]) {
+        return <Undef/>
+    }
 
-	    	<div className={'chat'}>
-	    		<Chat messages={list[uid].messages} />
-		    </div>
-    	</>
-  	);
+    return (
+        <>
+            <div className={'chatList'}>
+
+                {
+                    Object.keys(chatList)?.map(index => (
+                            <ListItem key={index} disablePadding>
+                                <Link to={'/chats/' + index} onClick={changeListUid} state={{uid: index, messages: list[index]?.messages}}>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                            <ChatIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary={list[index]?.name}
+                                                      secondary={index === uid ? 'Selected' : ''}/>
+                                    </ListItemButton>
+                                </Link>
+                            </ListItem>
+                        )
+                    )
+                }
+                <ListItem key={uuid()} onClick={addChat} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Add/>
+                        </ListItemIcon>
+                        <ListItemText primary='Add new chat'/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={uuid()} onClick={deleteFromChats} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Delete/>
+                        </ListItemIcon>
+                        <ListItemText primary='Delete current chat' secondary={list[uid]?.name}/>
+                    </ListItemButton>
+                </ListItem>
+            </div>
+
+            <div className={'chat'}>
+                {list[uid] && <Chat messages={list[uid]?.messages}/>}
+            </div>
+        </>
+    );
 }
 
 export default Chats;

@@ -21,6 +21,8 @@ const Chat = (props) => {
 	const theme = useTheme();
 	const {messages} = props; 
 
+	console.log(messages);
+
   let [list, setList] = useState(messages);
   const [message, setMessage] = useState('');
 
@@ -53,9 +55,9 @@ const Chat = (props) => {
   }
 
   //Focusing input on app start
-  useEffect(() => { messageInput.current.focus(); }, []);
+  useEffect(() => { messageInput.current.focus(); setList(messages); }, []);
 
-  useEffect(()=>{},[message, author])
+  useEffect(()=>{},[message, author, list])
 
   useEffect(() => {
     if(!message || !author){ return; }
