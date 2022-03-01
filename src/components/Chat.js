@@ -19,11 +19,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const Chat = (props) => {
 
 	const theme = useTheme();
-	const {messages} = props; 
-
-	console.log(messages);
-
+	let {messages} = props; 
   let [list, setList] = useState(messages);
+	console.log('list',list);
   const [message, setMessage] = useState('');
 
   const localAuthor = 'me';
@@ -55,7 +53,15 @@ const Chat = (props) => {
   }
 
   //Focusing input on app start
-  useEffect(() => { messageInput.current.focus(); setList(messages); }, []);
+  useEffect(() => { 
+  	console.log('messages', messages)
+  	messageInput.current.focus(); 
+  	setList(messages); 
+  }, []);
+
+  useEffect(() => { 
+  	setList(messages); 
+  }, [messages]);
 
   useEffect(()=>{},[message, author, list])
 

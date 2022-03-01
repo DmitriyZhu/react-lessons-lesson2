@@ -25,17 +25,27 @@ import Chats from './pages/Chats';
 import Undef from './pages/Undef';
 
 
+export const MyThemeContext = React.createContext({ theme: 'dark' });
+
+
+const menu = [
+  {path:'/'             , name: 'Home'},
+  {path:'/profile'      , name: 'Profile'},
+  {path:'/chats/default', name: 'Chats'},
+]
+
 //Just forgot to create new branch
 function App() {
 
   return (
     <div className="App">
+      <MyThemeContext.Provider value={{theme: 'dark'}} />
       <ToastContainer />
       <div className={'messenger'}>
         <div>
-            <Link to='/'>Home</Link>
-            <Link to='/profile'>Profile</Link>
-            <Link to='/chats/default'>Chats</Link>
+            {Object.keys(menu)?.map(index => (
+                <div className={'menuitem'} ><Link to={menu[index].path}>{menu[index].name}</Link></div>
+              ))}
         </div>
         <div>
           <Routes>

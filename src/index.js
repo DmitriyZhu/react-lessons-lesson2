@@ -9,6 +9,8 @@ import {orange, pink, grey} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
 
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 const theme = createTheme({
@@ -23,14 +25,14 @@ const theme = createTheme({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
+  ,document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

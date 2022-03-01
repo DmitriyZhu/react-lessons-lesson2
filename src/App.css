@@ -64,6 +64,10 @@ body{
   border: 1px solid ivory;
   max-width: 400px;
   overflow-y: auto;
+
+  width: 400px;
+  height:400px;
+
 }
 
 .chat {
@@ -103,4 +107,9 @@ body{
   border-top: 1px solid ivory;
   border-bottom: 1px solid ivory;
 
+}
+
+.menuitem{
+  display: table-cell;
+  padding:10px;
 }
