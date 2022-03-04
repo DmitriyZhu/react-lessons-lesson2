@@ -1,3 +1,7 @@
+body{
+  background-color: #464646;
+}
+
 .App {
   text-align: center;
 }
@@ -48,4 +52,64 @@
   display: block;
   min-width: 200px;
   text-align: center;
+}
+
+.messenger { 
+  display: table;
+  margin-top: 2%;
+  margin-left: calc(50% - 400px/2);
+  padding: 15px;
+
+  border-radius: 15px;
+  border: 1px solid ivory;
+  max-width: 400px;
+  overflow-y: auto;
+
+  width: 400px;
+  height:400px;
+
+}
+
+.chat {
+  display: table-cell;
+  padding: 15px;
+  text-align: left;
+  border-radius: 15px;
+  border: 1px solid ivory;
+  max-width: 400px;
+  min-width: 400px;
+  max-height: 200px;
+  min-height: 200px;
+
+}
+.chatSheet {
+  padding: 15px;
+  text-align: left;
+  border-radius: 15px;
+  border: 1px solid ivory;
+  max-height: 200px;
+  min-height: 200px;
+  overflow-y: auto;
+}
+.chatInputs {
+  padding: 15px;
+}
+
+.messagesUl{
+  margin-left: -50px;
+}
+
+.chatList{
+  display: table-cell;
+  border-radius: 15px;
+
+  border-left: 1px solid ivory;
+  border-top: 1px solid ivory;
+  border-bottom: 1px solid ivory;
+
+}
+
+.menuitem{
+  display: table-cell;
+  padding:10px;
 }
